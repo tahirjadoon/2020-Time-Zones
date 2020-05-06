@@ -21,13 +21,13 @@ namespace TZ.TimeZonesTest
         {
             CustomTimeZone.WriteNewLine();
             var easternOffset = GetOffsetMinutes(CustomTimeZone);
-            $"{CustomTimeZone} Offset (GMT): {easternOffset}".WriteNewLine(WriteLine.ColorCyan);
+            $"{CustomTimeZone} Offset (UTC): {easternOffset}".WriteNewLine(WriteLine.ColorCyan);
             "".RevertColor();
 
             "".EmptyLine();
             OtherTimeZone.WriteNewLine();
             var otherOffset = GetOffsetMinutes(OtherTimeZone);
-            $"{OtherTimeZone} Offset (GMT): {otherOffset}".WriteNewLine(WriteLine.ColorBlue);
+            $"{OtherTimeZone} Offset (UTC): {otherOffset}".WriteNewLine(WriteLine.ColorBlue);
             "".RevertColor();
 
             "".EmptyLine();
@@ -45,6 +45,15 @@ namespace TZ.TimeZonesTest
             $"{CustomTimeZone} Date to UTC: {customZoneDateToUtc.GetValueOrDefault().ToString("yyyy-MM-dd HH:mm:ss")}".WriteNewLine(WriteLine.ColorCyan);
             $"{OtherTimeZone} Date to UTC: {otherZoneDateConvertedToUtc.GetValueOrDefault().ToString("yyyy-MM-dd HH:mm:ss")}".WriteNewLine(WriteLine.ColorBlue);
             "".RevertColor();
+
+            "".EmptyLine();
+            "Displaying all the system time zone ids".WriteNewLine();
+            "ID | DisplayName | StandardName | DaylightName | BaseUtcOffset".WriteNewLine(WriteLine.ColorCyan);
+            "".RevertColor();
+            foreach (var zone in TimeZoneInfo.GetSystemTimeZones())
+            {
+                $"{zone.Id} | {zone.DisplayName} | {zone.StandardName} | {zone.DaylightName} | {zone.BaseUtcOffset}".WriteNewLine();
+            }
 
             "".EmptyLine();
             "".EmptyLine();
